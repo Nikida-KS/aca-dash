@@ -12,7 +12,7 @@
 //add the returned value from iteratee tp myNewArray
 //after looping, return  myNewArray
 function map(array, iteratee){
-
+changes 
 }
 
 //https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/filter
