@@ -12,8 +12,20 @@
 //add the returned value from iteratee tp myNewArray
 //after looping, return  myNewArray
 function map(array, iteratee){
-changes 
+    const mapped = [];
+    for(let i=0 ; i < array.length; i++){
+      if(iteratee){
+       mapped.push(iteratee(array[i]));
+      }
+    }
+    return mapped
 }
+
+const myArray = [33, 3, 1, 37, 2, 3, 5, 8, 10, -1, -14, 1112]
+const isEven = (item) => {
+    return item % 2 == 0
+}
+
 
 //https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/filter
 //create a function called `filter`, it should take 2 parameters `array` and `iteratee`
@@ -25,7 +37,13 @@ changes
 //iteratee will return true or false, if true add the item to myNewArray else do not
 //after looping, return myNewArray
 function filter(array, iteratee){
-
+    const filtered = [];
+    for(let i=0 ; i < array.length; i++){
+      if(iteratee(array[i]) === true){
+       filtered.push(array[i]);
+      }
+    }
+    return filtered
 }
 
 //https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/find
@@ -35,18 +53,24 @@ function filter(array, iteratee){
 //fnc will return true or false, if true return the item 
 //after looping, return null
 function find(theArray, fnc){
-
+    for(let i=0 ; i < theArray.length; i++){
+        if(fnc(theArray[i]) === true){
+            return theArray[i]
+        }
+    }
+    return null
 }
+
 
 
 //return the last item in theArray
 function findLast(theArray){
-
+    return theArray[theArray.length-1]
 }
 
 //return the first element of the array
 function head(theArray){
-
+    return theArray[0]
 }
 
 //create a new array
@@ -54,7 +78,11 @@ function head(theArray){
 //add the item from each loop to the new array
 //return the new array
 function reverse(theArray){
-
+    const reversed = [];
+    for(let i = theArray.length-1; i > -1; i--){
+        reversed.push(theArray[i])
+    }
+    return reversed
 }
 
 //create a new array
@@ -62,8 +90,14 @@ function reverse(theArray){
 //add the item from each loop to the new array except the first item
 //return the new array
 function tail(theArray){
-
+    const newArray = [];
+    for(let i = 1; i < theArray.length; i++){
+        newArray.push(theArray[i])
+    }
+    return newArray
 }
+
+
 
 //implement the most basic sorting algorithm there is
 //assume the array will always have numbers
@@ -75,9 +109,44 @@ function tail(theArray){
 //if a swap is done set it to true
 //after each for loop check the variable, if true, continue the while loop
 //if false return theArray
-function sort(theArray){
-
+function nestedForSort(theArray){
+    for(let j = 0; j<theArray.length; j++){
+        for(let i = 1; i < theArray.length; i++){
+            if(theArray[i]<theArray[i-1]){
+                const first = theArray[i-1];
+                theArray[i-1] = theArray[i];
+                theArray[i]=first;
+            }
+        }
+    }
+    return theArray
 }
+
+function sort(theArray){
+    let sorted = false;
+    while(!sorted){
+        sorted = true;
+        for(let i = 1; i < theArray.length; i++){
+            if(theArray[i]<theArray[i-1]){
+                const first = theArray[i-1];
+                theArray[i-1] = theArray[i];
+                theArray[i]=first;
+                sorted=false;
+            }
+        }
+    }
+    return theArray
+}
+
+
+console.log(filter(myArray, isEven));
+console.log(map(myArray, isEven));
+console.log(find(myArray, isEven));
+console.log(findLast(myArray));
+console.log(head(myArray));
+console.log(reverse(myArray));
+console.log(tail(myArray))
+console.log(sort(myArray))
 
 exports.map = map;
 exports.filter = filter;
